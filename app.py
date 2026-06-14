@@ -48,7 +48,8 @@ movie_name = st.selectbox(
 if st.button("Recommend"):
     results = recommend(movie_name)
 
-    st.subheader("Recommended Movies:")
+    st.success("Recommendations Generated!")
+    st.subheader("🎬 Recommended Movies")
 
     for i, movie in enumerate(results, start=1):
-        st.write(f"{i}. {movie}")
+        st.markdown(f"**{i}. {movie}**")
