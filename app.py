@@ -1,7 +1,8 @@
 import streamlit as st
-import pandas as pd
+import pandas as pd 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
 
 # Load dataset
 movies = pd.read_csv("movies.csv")
@@ -12,6 +13,7 @@ vectors = cv.fit_transform(movies['genres']).toarray()
 
 # Similarity matrix
 similarity = cosine_similarity(vectors)
+
 
 # Recommendation function
 def recommend(movie_name):
@@ -31,11 +33,11 @@ def recommend(movie_name):
     recommendations = []
 
     for movie in movie_list:
-        recommendations.append(
-            movies.iloc[movie[0]].title
-        )
+        movie_title = movies.iloc[movie[0]].title
+        recommendations.append(movie_title)
 
     return recommendations
+
 
 # Streamlit UI
 st.title("🎬 Movie Recommendation System")
@@ -51,5 +53,7 @@ if st.button("Recommend"):
     st.success("Recommendations Generated!")
     st.subheader("🎬 Recommended Movies")
 
-    for i, movie in enumerate(results, start=1):
-        st.markdown(f"**{i}. {movie}**")
+    for i, movie in enumerate(results):
+        st.markdown(f"### {movie}")
+
+     
